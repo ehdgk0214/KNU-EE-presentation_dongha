@@ -4,36 +4,44 @@
 const majorsData = [
     {
         title: "임베디드 시스템 및 회로",
+       // 이미지 경로 추가 (반드시 실제 파일이 있어야 함)
+        img: "./assets/images/major-embedded.jpg",
         desc: "하드웨어 장치를 제어하는 두뇌를 설계합니다. 회로망 해석(Delta-Wye 변환 등)과 마이크로프로세서 제어 기술을 통해 하드웨어와 소프트웨어를 결합합니다.",
         details: ["디지털 논리 회로 및 실습", "전자회로 및 Delta-Wye 등 복잡한 회로망 해석", "마이크로컨트롤러(MCU) 프로그래밍", "소형 전자기기 및 시스템 디버깅 역량"]
     },
     {
         title: "반도체 및 디스플레이",
+        img: "./assets/images/Semiconductors.jpg",
         desc: "현대 IT 기기의 핵심 부품인 메모리, 시스템 반도체 및 디스플레이 패널의 동작 원리와 제조 공정을 연구합니다.",
         details: ["물리전자 및 반도체 공학", "집적회로(IC) 설계", "OLED 및 차세대 디스플레이 원리"]
     },
     {
         title: "멀티미디어 및 의공학",
+        img: "./assets/images/Biomedical.jpg",
         desc: "영상 및 음성 데이터를 처리하는 기술과, 이를 의료 기기에 접목하여 인체 신호를 분석하고 질병을 진단하는 기술을 배웁니다.",
         details: ["영상 처리 및 컴퓨터 비전", "의료 전자기기 설계", "생체 신호 측정 및 분석"]
     },
     {
         title: "전자파 및 광전자",
+        img: "./assets/images/Electromagnetic.jpg",
         desc: "안테나, 레이더, 광통신 등 전자기파의 특성을 활용합니다. 직교, 원통, 구 좌표계와 벡터 미적분학을 활용한 3차원 전자파 해석이 핵심입니다.",
         details: ["전자기학 및 벡터 미적분학 응용", "안테나 공학 및 마이크로파", "광통신 및 레이저 공학"]
     },
     {
         title: "인공지능 및 신호처리",
+        img: "./assets/images/aiai.jpg",
         desc: "데이터에 숨겨진 패턴을 분석하고 기계 학습 알고리즘을 최적화하여 스마트 시스템을 구축하는 소프트웨어 중심 전공입니다.",
         details: ["디지털 신호 처리(DSP)", "머신러닝 및 딥러닝 개론", "음성 및 영상 신호 최적화 알고리즘"]
     },
     {
         title: "정보통신",
+        img: "./assets/images/inform.jpg",
         desc: "스마트폰, 인터넷, IoT 기기들이 서로 데이터를 주고받는 유무선 통신 네트워크 시스템과 보안 프로토콜을 연구합니다.",
         details: ["이동통신 공학 (5G/6G)", "데이터 통신망 설계", "정보 이론 및 네트워크 보안"]
     },
     {
         title: "지능시스템 및 제어",
+        img: "./assets/images/Control.jpg",
         desc: "자율주행 자동차, 드론, 산업용 로봇 등이 주변 환경을 인식하고 스스로 제어하여 움직이도록 하는 기술을 다룹니다.",
         details: ["자동제어 및 센서 공학", "로봇 제어 시스템", "드론 및 자율주행 알고리즘"]
     },
@@ -112,15 +120,29 @@ function renderCards(containerId, dataArray, type) {
 /* --------------------------------
    모달 인터랙션 (2배 확대 및 Dim)
 -------------------------------- */
+/* 2. 모달 오픈 함수 수정 (이미지 렌더링 로직 추가) */
 function openModal(data) {
     modalTitle.innerText = data.title;
     
-    // 내용 구성 (설명 + 리스트)
-    let contentHtml = `<p>${data.desc}</p><ul>`;
+    // 내용 구성 (이미지 영역 추가)
+    let contentHtml = '';
+    
+    // 데이터에 이미지 경로가 잇는 경우에만 img 태그 생성
+    if (data.img) {
+        contentHtml += `
+            <div class="modal-image-container">
+                <img src="${data.img}" alt="${data.title}" class="modal-image">
+            </div>
+        `;
+    }
+
+    // 기존 텍스트 설명 및 리스트
+    contentHtml += `<p class="modal-desc">${data.desc}</p><ul>`;
     data.details.forEach(detail => {
         contentHtml += `<li>${detail}</li>`;
     });
     contentHtml += `</ul>`;
+    
     modalBody.innerHTML = contentHtml;
 
     // 모달 표시 (CSS 클래스를 통한 transform, opacity 애니메이션 트리거)
