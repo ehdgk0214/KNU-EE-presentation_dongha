@@ -246,3 +246,15 @@ tocLinks.forEach(link => {
 
 // 초기화 실행
 init();
+/* --------------------------------
+   진로 카드 클릭 토글 인터랙션
+-------------------------------- */
+// 화면에 있는 모든 진로 카드를 찾습니다.
+const careerCards = document.querySelectorAll('.career-card');
+
+careerCards.forEach(card => {
+    card.addEventListener('click', () => {
+        // 카드를 클릭할 때마다 'active-red' 클래스를 넣었다가 뺐다가(toggle) 합니다.
+        card.classList.toggle('active-red');
+    });
+});
