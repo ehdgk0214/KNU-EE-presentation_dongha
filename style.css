@@ -460,3 +460,86 @@ h2 {
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     object-fit: cover;
 }
+/* --------------------------------
+   전자공학 페이지 캐릭터 인터랙션
+-------------------------------- */
+
+/* 캐릭터와 말풍선을 감싸는 컨테이너 */
+.char-interaction-container {
+    position: absolute;
+    bottom: 50px;    /* 바닥에서 여백 */
+    left: 50px;      /* 왼쪽에서 여백 */
+    display: flex;
+    flex-direction: column-align; /* 말풍선이 캐릭터 위에 오도록 */
+    align-items: flex-start;
+    cursor: pointer; /* 클릭 가능하다는 표시 */
+    z-index: 20;     /* 카드 위에 오도록 설정 */
+}
+
+/* 캐릭터 이미지 스타일 */
+.char-img {
+    width: 120px;    /* 캐릭터 크기 조절 (원하는 대로 변경 가능) */
+    height: auto;
+    transition: transform 0.3s ease;
+    /* 약간의 그림자 효과로 입체감 부여 */
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+/* 캐릭터 호버 시 살짝 커지는 효과 */
+.char-interaction-container:hover .char-img {
+    transform: scale(1.05);
+}
+
+/* 말풍선 기본 스타일 */
+.speech-bubble {
+    position: absolute;
+    bottom: 130%;    /* 캐릭터 이미지 위쪽에 배치 */
+    left: 0;
+    width: 280px;    /* 말풍선 너비 */
+    background-color: #333; /* 어두운 배경으로 가독성 확보 */
+    color: #fff;     /* 흰색 글씨 */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    
+    /* 💡 핵심: 초기 상태 숨김 */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px); /* 아래에서 위로 나타나는 효과용 */
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+/* 💡 말풍선 꼬리 (삼각형) */
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    top: 100%;       /* 말풍선 바닥에 붙임 */
+    left: 30px;      /* 왼쪽에서 꼬리 위치 */
+    border-width: 10px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent; /* 배경색과 동일하게 */
+}
+
+/* 말풍선 텍스트 스타일 */
+.speech-bubble p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* 말풍선 내 강조 단어 색상 */
+.bubble-highlight {
+    color: var(--color-yellow); /* 보조 컬러 황색 사용 */
+    font-weight: bold;
+}
+.bubble-danger {
+    color: var(--color-sub-red); /* 보조 레드로 위험 강조 */
+    font-weight: bold;
+}
+
+/* 💡 JS로 추가될 '보임' 클래스 */
+.speech-bubble.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* 제자리로 */
+}
