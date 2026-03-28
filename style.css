@@ -417,3 +417,32 @@ h2 {
 .modal-desc {
     margin-top: 0;
 }
+
+/* 확대 창(모달) 좌우 분할 레이아웃 */
+.modal-flex-layout {
+    display: flex;
+    gap: 30px; /* 글과 사진 사이의 간격 */
+    align-items: center; /* 세로 중앙 정렬 (위로 맞추려면 flex-start) */
+}
+
+/* 왼쪽 글씨 영역 */
+.modal-text-zone {
+    flex: 1; /* 남은 공간 차지 */
+    text-align: left;
+}
+
+/* 오른쪽 이미지 영역 */
+.modal-image-zone {
+    flex: 0 0 45%; /* 전체 너비의 45% 정도만 차지하도록 고정 */
+    text-align: right; /* 이미지를 오른쪽으로 밀착 */
+}
+
+/* 모달 내부 이미지 크기 재설정 */
+.modal-image-zone .modal-image {
+    max-width: 100%;
+    max-height: 250px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    object-fit: cover;
+}
