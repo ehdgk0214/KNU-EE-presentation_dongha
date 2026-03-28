@@ -120,34 +120,36 @@ function renderCards(containerId, dataArray, type) {
 /* --------------------------------
    모달 인터랙션 (2배 확대 및 Dim)
 -------------------------------- */
-/* 2. 모달 오픈 함수 수정 (이미지 렌더링 로직 추가) */
+// script.js 에서 openModal 함수 내부 수정
+
 function openModal(data) {
     modalTitle.innerText = data.title;
     
-    // 내용 구성 (이미지 영역 추가)
-    let contentHtml = '';
+    // 모달 내부를 좌/우로 나누기 위한 래퍼(wrapper) 추가
+    let contentHtml = `<div class="modal-flex-layout">`;
     
-    // 데이터에 이미지 경로가 잇는 경우에만 img 태그 생성
+    // 왼쪽: 텍스트 영역
+    contentHtml += `<div class="modal-text-zone">`;
+    contentHtml += `<p class="modal-desc">${data.desc}</p><ul>`;
+    data.details.forEach(detail => {
+        contentHtml += `<li>${detail}</li>`;
+    });
+    contentHtml += `</ul></div>`; // 텍스트 영역 닫기
+
+    // 오른쪽: 이미지 영역 (데이터에 이미지가 있을 경우만)
     if (data.img) {
         contentHtml += `
-            <div class="modal-image-container">
+            <div class="modal-image-zone">
                 <img src="${data.img}" alt="${data.title}" class="modal-image">
             </div>
         `;
     }
 
-    // 기존 텍스트 설명 및 리스트
-    contentHtml += `<p class="modal-desc">${data.desc}</p><ul>`;
-    data.details.forEach(detail => {
-        contentHtml += `<li>${detail}</li>`;
-    });
-    contentHtml += `</ul>`;
+    contentHtml += `</div>`; // 전체 래퍼 닫기
     
     modalBody.innerHTML = contentHtml;
 
-    // 모달 표시 (CSS 클래스를 통한 transform, opacity 애니메이션 트리거)
     modalOverlay.classList.remove('hidden');
-    // 약간의 딜레이를 주어 transition이 적용되도록 함
     setTimeout(() => {
         modalOverlay.classList.add('show');
     }, 10);
