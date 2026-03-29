@@ -13,7 +13,7 @@ const majorsData = [
         title: "반도체 및 디스플레이",
         img: "./assets/images/Semiconductors.jpg",
         desc: "현대 IT 기기의 핵심 부품인 메모리, 시스템 반도체 및 디스플레이 패널의 동작 원리와 제조 공정을 연구합니다.",
-        details: ["물리전자 및 반도체 공학", "(<b class='clickable-term' data-img='./assets/images/ic_chip.png' data-title='[예시] 집적회로' data-caption=''>집적회로(IC)</b> ) 설계", "OLED 및 차세대 디스플레이 원리"]
+        details: ["물리전자 및 반도체 공학", "(<b class='clickable-term' data-img='./assets/images/ic_chip.png' data-title='[예시] 집적회로' data-caption='수많은 전자 부품을 손톱 크기 칩에 압축한 집적회로(IC) 내부 구조'>집적회로(IC)</b> ) 설계", "OLED 및 차세대 디스플레이 원리"]
     },
     {
         title: "멀티미디어 및 의공학",
@@ -31,7 +31,7 @@ const majorsData = [
         title: "인공지능 및 신호처리",
         img: "./assets/images/aiai.jpg",
         desc: "데이터에 숨겨진 패턴을 분석하고 기계 학습 알고리즘을 최적화하여 스마트 시스템을 구축하는 소프트웨어 중심 전공입니다.",
-        details: ["디지털 신호 처리(DSP)", "머신러닝 및 딥러닝 개론", "음성 및 영상 신호 최적화 알고리즘"]
+        details: ["디지털 신호 처리(<b class='clickable-term' data-img='./assets/images/dsp.png' data-title='[예시] 디지털 신호처' data-caption='아날로그 신호를 잘개 쪼개어 디지털화'>(DSP)</b> )", "머신러닝 및 딥러닝 개론", "음성 및 영상 신호 최적화 알고리즘"]
     },
     {
         title: "정보통신",
