@@ -13,13 +13,13 @@ const majorsData = [
         title: "반도체 및 디스플레이",
         img: "./assets/images/Semiconductors.jpg",
         desc: "현대 IT 기기의 핵심 부품인 메모리, 시스템 반도체 및 디스플레이 패널의 동작 원리와 제조 공정을 연구합니다.",
-        details: ["물리전자 및 반도체 공학", "(<b class='clickable-term' data-img='./assets/images/ic_chip.png' data-title='[예시] 집적회로' data-caption=''>집적회로(IC) </b> ) 설계", "OLED 및 차세대 디스플레이 원리"]
+        details: ["물리전자 및 반도체 공학", "(<b class='clickable-term' data-img='./assets/images/ic_chip.png' data-title='[예시] 집적회로' data-caption=''>집적회로(IC)</b> ) 설계", "OLED 및 차세대 디스플레이 원리"]
     },
     {
         title: "멀티미디어 및 의공학",
         img: "./assets/images/Biomedical.jpg",
         desc: "영상 및 음성 데이터를 처리하는 기술과, 이를 의료 기기에 접목하여 인체 신호를 분석하고 질병을 진단하는 기술을 배웁니다.",
-        details: ["영상 처리 및 (<b class='clickable-term' data-img='./assets/images/computer_vision.png' data-title='[예시] 컴퓨터 비전' data-caption='사람이 눈으로 사물을 보고 인지하는 작업을 컴퓨터가 수행하는 모습'>컴퓨터 비전 </b> )", "의료 전자기기 설계", "생체 신호 측정 및 분석"]
+        details: ["영상 처리 및 (<b class='clickable-term' data-img='./assets/images/computer_vision.png' data-title='[예시] 컴퓨터 비전' data-caption='사람이 눈으로 사물을 보고 인지하는 작업을 컴퓨터가 수행하는 모습'>컴퓨터 비전</b> )", "의료 전자기기 설계", "생체 신호 측정 및 분석"]
     },
     {
         title: "전자파 및 광전자",
