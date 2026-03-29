@@ -468,7 +468,7 @@ h2 {
 .char-interaction-container {
     position: absolute;
     bottom: 50px;    /* 바닥에서 여백 */
-    left: 150px;      /* 왼쪽에서 여백 */
+    left: 100px;      /* 왼쪽에서 여백 */
     display: flex;
     flex-direction: column-align; /* 말풍선이 캐릭터 위에 오도록 */
     align-items: flex-start;
