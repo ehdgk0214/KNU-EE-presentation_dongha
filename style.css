@@ -161,6 +161,12 @@ h2 {
 .subtitle {
     font-size: 1.8rem;
     color: var(--color-text-muted);
+    margin-bottom: 15px;
+}
+
+.subtitle1 {
+    font-size: 1.3rem;
+    color: var(--color-text-muted);
     margin-bottom: 40px;
 }
 
