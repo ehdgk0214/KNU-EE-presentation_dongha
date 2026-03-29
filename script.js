@@ -123,21 +123,18 @@ function renderCards(containerId, dataArray, type) {
 -------------------------------- */
 // script.js 에서 openModal 함수 내부 수정
 
+/* 1. 새로운 두 번째 모달 DOM 요소를 가져옵니다. */
+const examModalOverlay = document.getElementById('exam-modal-overlay');
+const examModalCloseBtn = document.getElementById('exam-modal-close');
+const examModalBody = document.getElementById('exam-modal-body');
+
+
 /* 2. openModal 함수를 찾아 완전히 아래 코드로 대체하세요. */
 function openModal(data) {
     modalTitle.innerText = data.title;
     
-    // 내용 구성 (기존 HTML 구조는 유지하되, 설명 아래 이미지 영역 추가)
-    let contentHtml = `
-        <p class="modal-desc">${data.desc}</p>
-        
-        <div id="dw-example-container" class="hidden-exam">
-            <img src="./assets/images/delta-wye-exam.png" alt="Delta-Wye 변환 예시" class="exam-img">
-            <p class="exam-caption">[예시] 브릿지 회로 해석을 위한 Δ-Y 등가 변환</p>
-        </div>
-
-        <ul>
-    `;
+    // 내용 구성 (💡 핵심: 기존의 #dw-example-container 이미지 영역을 HTML에서 **제거**합니다.)
+    let contentHtml = `<p class="modal-desc">${data.desc}</p><ul>`;
     data.details.forEach(detail => {
         contentHtml += `<li>${detail}</li>`;
     });
@@ -150,26 +147,49 @@ function openModal(data) {
     setTimeout(() => {
         modalOverlay.classList.add('show');
         
-        /* 💡 핵심: 모달이 완전히 뜨고 HTML이 렌더링 된 후에 이벤트를 걸어야 합니다. */
+        // 모달이 완전히 뜨고 HTML이 렌더링 된 후에 이벤트를 걸어야 합니다.
         attachDeltaWyeEvent(); 
     }, 10);
 }
 
-/* 💡 추가: Delta-Wye 클릭 이벤트를 붙이는 별도 함수 */
+/* 3. attachDeltaWyeEvent 함수를 찾아 완전히 아래 코드로 대체하세요. */
 function attachDeltaWyeEvent() {
     const dwLink = document.getElementById('dw-link');
-    const dwContainer = document.getElementById('dw-example-container');
 
     // 해당 링크가 현재 모달에 존재할 때만 이벤트 등록
-    if (dwLink && dwContainer) {
+    if (dwLink) {
         dwLink.addEventListener('click', (e) => {
-            e.preventDefault(); // 혹시 모를 기본 동작 방지
-            // 'open' 클래스를 토글 (슬라이드 애니메이션 트리거)
-            dwContainer.classList.toggle('open');
+            e.preventDefault(); 
+            // 이미지를 슬라이드 다운하는 것이 아니라, 두 번째 모달을 엽니다.
+            openExamModal(); 
         });
     }
 }
+/* 💡 추가: 두 번째 모달 (예시 이미지 모달) 열기 함수 */
+function openExamModal() {
+    // 💡 UX 핵심: 두 번째 모달의 바디에 이미지를 **동적으로** 삽입합니다.
+    // HTML에 미리 넣어두면 불필요한 리소스를 차지할 수 있습니다.
+    examModalBody.innerHTML = `
+        <img src="./assets/images/delta-wye-exam.png" alt="Delta-Wye 변환 예시" class="exam-img">
+        <p class="exam-caption">[예시] 브릿지 회로 해석을 위한 Δ-Y 등가 변환</p>
+    `;
 
+    // 두 번째 모달 표시 (첫 번째 모달과 동일한 방식)
+    examModalOverlay.classList.remove('hidden');
+    setTimeout(() => {
+        examModalOverlay.classList.add('show');
+    }, 10);
+}
+/* 💡 추가: 두 번째 모달 (예시 이미지 모달) 닫기 함수 */
+function closeExamModal() {
+    examModalOverlay.classList.remove('show');
+    // 애니메이션이 끝난 후 hidden 처리
+    setTimeout(() => {
+        examModalOverlay.classList.add('hidden');
+        // 닫힐 때 내부 HTML을 비워서 리소스 관리
+        examModalBody.innerHTML = '';
+    }, 400); 
+}
 function closeModal() {
     modalOverlay.classList.remove('show');
     // 애니메이션이 끝난 후 hidden 처리
@@ -186,7 +206,21 @@ modalOverlay.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeModal();
 });
-
+/* 4. 두 번째 모달 닫기 이벤트 등록 (기본 모달 닫기 로직 아래에 추가) */
+examModalCloseBtn.addEventListener('click', closeExamModal);
+examModalOverlay.addEventListener('click', (e) => {
+    if (e.target === examModalOverlay) closeExamModal();
+});
+document.addEventListener('keydown', (e) => {
+    // 두 번째 모달이 열려있다면 ESC로 두 번째 모달만 닫습니다.
+    if (e.key === 'Escape' && examModalOverlay.classList.contains('show')) {
+        closeExamModal();
+    }
+    // (기존 코드) 기본 모달 닫기 로직은 유지하되, 두 번째 모달이 없을 때만 작동하게 수정하면 좋습니다.
+    else if (e.key === 'Escape' && modalOverlay.classList.contains('show')) {
+        closeModal();
+    }
+});
 /* --------------------------------
    슬라이드 이동 로직
 -------------------------------- */
